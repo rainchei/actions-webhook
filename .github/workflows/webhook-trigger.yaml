@@ -25,7 +25,7 @@ jobs:
         run: |
           echo "Event triggered by ${GITHUB_EVENT_NAME}"
           echo "Dispatch type ${{ github.event.action }}"
-          echo "Ref ${GITHUB_REF}"
+          cat this_branch
       - name: Goodbye
         if: ${{ github.event.action == 'webhook-one' }}
         run: npx cowsay "Bye!"
