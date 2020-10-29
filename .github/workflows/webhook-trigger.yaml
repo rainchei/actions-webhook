@@ -3,8 +3,8 @@ name: webhook-trigger
 on:
   repository_dispatch:
     types:
-      - webhook-one
-      - webhook-two
+      - main
+      - dev
 
 jobs:
   build:
@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.action }}
       - name: Setup Node.js environment
         uses: actions/setup-node@v1.4.2
         with:
@@ -23,6 +25,7 @@ jobs:
         run: |
           echo "Event triggered by ${GITHUB_EVENT_NAME}"
           echo "Dispatch type ${{ github.event.action }}"
+          echo "Ref ${GITHUB_REF}"
       - name: Goodbye
         if: ${{ github.event.action == 'webhook-one' }}
         run: npx cowsay "Bye!"
