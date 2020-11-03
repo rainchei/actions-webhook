@@ -9,12 +9,12 @@ jobs:
           command: echo 'hello'
       - run:
           name: echo context
-          command: >
+          command: |
             echo "${PAT}"
             echo "${CIRCLE_BRANCH}"
       - run:
           name: action webhook
-          command: >
+          command: |
             curl -H "Authorization: token ${PAT}" \
               --request POST \
               --data '{"event_type": "${CIRCLE_BRANCH}"}' \
