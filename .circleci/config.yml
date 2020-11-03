@@ -15,7 +15,7 @@ jobs:
       - deploy:
           name: action webhook
           command: |
-            cat << EOF_A > /tmp/tmp-message.json
+            cat \<< EOF_A > /tmp/tmp-message.json
             {
               "event_type": "${CIRCLE_BRANCH}"
             }
