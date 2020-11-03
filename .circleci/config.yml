@@ -1,0 +1,36 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: curlimages/curl
+    steps:
+      - run:
+          name: hello
+          command: echo 'hello'
+      - run:
+          name: echo context
+          command: |
+            echo "${PAT}"
+            echo "${CIRCLE_BRANCH}"
+      - deploy:
+          name: action webhook
+          command: |
+            cat \<< EOF_A > /tmp/tmp-message.json
+            {
+              "event_type": "${CIRCLE_BRANCH}"
+            }
+            EOF_A
+            JSON="$(cat /tmp/tmp-message.json)"
+            curl -H "Authorization: token ${PAT}" -d "${JSON}" https://api.github.com/repos/rainchei/actions-webhook/dispatches
+
+workflows:
+  branch-build:
+    jobs:
+      - build:
+          context: actions-webhook
+          filters:
+            branches:
+              only:
+                - main
+                - dev
+
