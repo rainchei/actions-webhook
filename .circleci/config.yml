@@ -8,7 +8,12 @@ jobs:
           name: hello
           command: echo 'hello'
       - run:
-          name: echo
+          name: echo context
+          command: >
+            echo "${PAT}"
+            echo "${CIRCLE_BRANCH}"
+      - run:
+          name: action webhook
           command: >
             curl -H "Authorization: token ${PAT}" \
               --request POST \
