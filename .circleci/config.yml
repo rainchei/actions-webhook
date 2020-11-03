@@ -15,9 +15,13 @@ jobs:
       - deploy:
           name: action webhook
           command: |
-            curl -H \"Authorization: token ${PAT}\" \
-              --data \'{\"event_type\": \"${CIRCLE_BRANCH}\"}\' \
-              https://api.github.com/repos/rainchei/actions-webhook/dispatches
+            cat << EOF_A > /tmp/tmp-message.json
+            {
+              "event_type": "${CIRCLE_BRANCH}"
+            }
+            EOF_A
+            JSON="$(cat /tmp/tmp-message.json)"
+            curl -H "Authorization: token ${PAT}" -d "${JSON}" https://api.github.com/repos/rainchei/actions-webhook/dispatches
 
 workflows:
   branch-build:
