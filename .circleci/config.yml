@@ -7,11 +7,15 @@ jobs:
       - run:
           name: hello
           command: echo 'hello'
+      - run:
+          name: echo
+          command: echo $PAT
 
 workflows:
   branch-build:
     jobs:
       - build:
+          context: actions-webhook
           filters:
             branches:
               only:
