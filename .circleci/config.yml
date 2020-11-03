@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: gcr.io/google-containers/busybox:1.24
+      - image: curlimages/curl
     steps:
       - run:
           name: hello
