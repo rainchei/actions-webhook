@@ -35,7 +35,9 @@ workflows:
               only:
                 - main
                 - dev
-                - ci.*
+            tags:
+              only:
+                - /^ci.*/
       - build:
           context: actions-webhook
           requires:
