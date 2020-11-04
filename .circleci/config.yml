@@ -26,19 +26,23 @@ jobs:
             JSON="$(cat /tmp/tmp-message.json)"
             curl -H "Authorization: token ${PAT}" -d "${JSON}" https://api.github.com/repos/rainchei/actions-webhook/dispatches
 
+workflow-filter: &workflow-filter
+  filters:
+    branches:
+      only:
+        - main
+        - dev
+    tags:
+      only:
+        - /^ci.*/
+
 workflows:
   test-and-build:
     jobs:
       - test:
-          filters:
-            branches:
-              only:
-                - main
-                - dev
-            tags:
-              only:
-                - /^ci.*/
+          <<: *workflow-filter
       - build:
+          <<: *workflow-filter
           context: actions-webhook
           requires:
             - test
