@@ -2,9 +2,6 @@ name: webhook-trigger
 
 on:
   repository_dispatch:
-    types:
-      - main
-      - dev
 
 jobs:
   build:
