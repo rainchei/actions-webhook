@@ -35,7 +35,6 @@ workflows:
               only:
                 - main
                 - dev
-              ignore: /.*/
             tags:
               only: /^ci.*/
       - build:
