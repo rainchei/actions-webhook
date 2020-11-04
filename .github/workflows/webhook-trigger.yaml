@@ -2,7 +2,9 @@ name: webhook-trigger
 
 on:
   repository_dispatch:
-    types: ${{ github.event.action }}
+    types:
+      - main
+      - dev
 
 jobs:
   build:
