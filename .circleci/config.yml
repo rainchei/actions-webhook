@@ -17,7 +17,10 @@ jobs:
           command: |
             cat \<< EOF_A > /tmp/tmp-message.json
             {
-              "event_type": "${CIRCLE_BRANCH}"
+              "event_type": "${CIRCLE_BRANCH}",
+              "client_payload": {
+                "commit_sha": "${CIRCLE_SHA1}"
+              }
             }
             EOF_A
             JSON="$(cat /tmp/tmp-message.json)"
