@@ -17,7 +17,7 @@ jobs:
           ref: ${{ github.event.action }}
       - name: Hello
         run: echo "Hello, I've been triggered by a webhook!"
-      - name: Event Name
+      - name: Echo github.event
         run: |
           echo "Dispatch type: ${{ github.event.action }}"
           echo "commit sha: ${{ github.event.client_payload.commit_sha }}"
