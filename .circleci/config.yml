@@ -16,9 +16,10 @@ jobs:
           command: |
             cat \<< EOF_A > /tmp/tmp-message.json
             {
-              "event_type": "${CIRCLE_BRANCH}",
+              "event_type": "create",
               "client_payload": {
-                "commit_sha": "${CIRCLE_SHA1}"
+                "commit_sha": "${CIRCLE_SHA1}",
+                "branch": "${CIRCLE_BRANCH}"
               }
             }
             EOF_A
