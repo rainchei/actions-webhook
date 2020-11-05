@@ -22,8 +22,8 @@ jobs:
           echo "Dispatch type: ${{ github.event.action }}"
           echo "commit sha: ${{ github.event.client_payload.commit_sha }}"
       - name: Goodbye
-        if: ${{ contains(github.event.client_payload.branch, 'main') }}
+        if: ${{ github.event.client_payload.branch == 'main' }}
         run: npx cowsay "Bye!"
       - name: Adios
-        if: ${{ contains(github.event.client_payload.branch, 'dev') }}
+        if: ${{ github.event.client_payload.branch == 'dev' }}
         run: npx cowsay "Adios!"
