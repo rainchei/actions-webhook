@@ -31,11 +31,11 @@ jobs:
                 EOF_A
                 JSON="$(cat /tmp/tmp-message.json)"
                 curl -H "Authorization: token ${PAT}" -d "${JSON}" https://api.github.com/repos/rainchei/actions-webhook/dispatches
-                ;;
-              **)
+              ;;
+              *)
                 echo "No need to build for ${CIRCLE_BRANCH}."
                 echo
-                ;;
+              ;;
             esac
 
 workflow-filter: &workflow-filter
