@@ -19,7 +19,7 @@ jobs:
           echo "Hello, I've been triggered by a webhook!"
       - name: Echo github.event
         run: |
-          echo "Dispatch type: ${{ github.event.action }}"
+          echo "Dispatch type: ${{ github.event.client_payload.branch }}"
           echo "commit sha: ${{ github.event.client_payload.commit_sha }}"
       - name: Goodbye
         if: ${{ github.event.client_payload.branch == 'main' }}
