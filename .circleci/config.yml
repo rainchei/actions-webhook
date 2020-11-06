@@ -35,6 +35,7 @@ jobs:
               echo "No need to build for ${CIRCLE_BRANCH}."
               echo
               ;;
+          esac
 
 workflow-filter: &workflow-filter
   filters:
