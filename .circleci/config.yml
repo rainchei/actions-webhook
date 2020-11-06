@@ -9,7 +9,7 @@ jobs:
           command: echo 'hello'
   build:
     docker:
-      - image: bash
+      - image: docker:17.05.0-ce-git
     steps:
       - run:
           name:
