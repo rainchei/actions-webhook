@@ -5,6 +5,9 @@ on:
     types:
       - create
 
+env:
+  LIST: foo,bar
+
 jobs:
   build:
     name: build
@@ -17,6 +20,12 @@ jobs:
       - name: Hello
         run: |
           echo "Hello, I've been triggered by a webhook!"
+      - name: List
+        run: |
+          arr=(${LIST//,/ })
+          for i in "${!arr[@]}"; do
+            echo "$i => ${arr[i]}"
+          done
       - name: Echo github.event
         run: |
           echo "Dispatch type: ${{ github.event.client_payload.branch }}"
