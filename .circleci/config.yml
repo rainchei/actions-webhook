@@ -14,7 +14,7 @@ jobs:
       - run:
           name: build
           command: |
-            case $CIRCLE_BRANCH in
+            case "${CIRCLE_BRANCH}" in
               main)
                 echo "Build for image:"
                 echo "- commit_sha: ${CIRCLE_SHA1}"
