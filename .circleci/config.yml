@@ -19,11 +19,14 @@ jobs:
                 echo "Build for image:"
                 echo "- commit_sha: ${CIRCLE_SHA1}"
                 echo "- branch: ${CIRCLE_BRANCH}"
+                JSON={ "event_type": "create", "client_payload": { "commit_sha": "${CIRCLE_SHA1}", "branch": "${CIRCLE_BRANCH}" } }
+                curl -H "Authorization: token ${PAT}" -d "${JSON}" https://api.github.com/repos/rainchei/actions-webhook/dispatches
                 ;;
               *)
                 echo "No need to build for ${CIRCLE_BRANCH}."
                 ;;
             esac
+
 
 workflow-filter: &workflow-filter
   filters:
