@@ -9,33 +9,33 @@ jobs:
           command: echo 'hello'
   build:
     docker:
-      - image: docker:17.05.0-ce-git
+      - image: curlimages/curl
     steps:
       - run:
-          name:
+          name: build
           command: |
-            case ${CIRCLE_BRANCH} in
-                main)
-                    echo "Build for image:"
-                    echo "- commit_sha: ${CIRCLE_SHA1}"
-                    echo "- branch: ${CIRCLE_BRANCH}"
-                    echo
-                    cat \<< EOF_A > /tmp/tmp-message.json
-                    {
-                      "event_type": "create",
-                      "client_payload": {
-                        "commit_sha": "${CIRCLE_SHA1}",
-                        "branch": "${CIRCLE_BRANCH}"
-                      }
-                    }
-                    EOF_A
-                    JSON="$(cat /tmp/tmp-message.json)"
-                    curl -H "Authorization: token ${PAT}" -d "${JSON}" https://api.github.com/repos/rainchei/actions-webhook/dispatches
-                    ;;
-                *)
-                    echo "No need to build for ${CIRCLE_BRANCH}."
-                    echo
-                    ;;
+            case $CIRCLE_BRANCH in
+              main)
+                echo "Build for image:"
+                echo "- commit_sha: ${CIRCLE_SHA1}"
+                echo "- branch: ${CIRCLE_BRANCH}"
+                echo
+                cat \<< EOF_A > /tmp/tmp-message.json
+                {
+                  "event_type": "create",
+                  "client_payload": {
+                    "commit_sha": "${CIRCLE_SHA1}",
+                    "branch": "${CIRCLE_BRANCH}"
+                  }
+                }
+                EOF_A
+                JSON="$(cat /tmp/tmp-message.json)"
+                curl -H "Authorization: token ${PAT}" -d "${JSON}" https://api.github.com/repos/rainchei/actions-webhook/dispatches
+                ;;
+              **)
+                echo "No need to build for ${CIRCLE_BRANCH}."
+                echo
+                ;;
             esac
 
 workflow-filter: &workflow-filter
