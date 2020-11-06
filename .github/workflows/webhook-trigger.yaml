@@ -22,9 +22,9 @@ jobs:
           echo "Hello, I've been triggered by a webhook!"
       - name: Arr
         run: |
-          arr=($(echo "$ARR" | tr ',' '\n'))
-          for i in "${!arr[@]}"; do
-            echo "$i => ${arr[i]}"
+          arr=($(echo "$ARR" | tr ',' ' '))
+          for i in "${arr[@]}"; do
+            echo "$i"
           done
       - name: Echo github.event
         run: |
