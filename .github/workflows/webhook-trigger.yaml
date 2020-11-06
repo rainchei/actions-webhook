@@ -6,7 +6,7 @@ on:
       - create
 
 env:
-  LIST: foo,bar
+  ARR: foo,bar
 
 jobs:
   build:
@@ -20,9 +20,9 @@ jobs:
       - name: Hello
         run: |
           echo "Hello, I've been triggered by a webhook!"
-      - name: List
+      - name: Arr
         run: |
-          arr=(${LIST//,/ })
+          arr=($(echo "$ARR" | tr ',' '\n'))
           for i in "${!arr[@]}"; do
             echo "$i => ${arr[i]}"
           done
