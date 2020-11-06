@@ -19,7 +19,6 @@ jobs:
                 echo "Build for image:"
                 echo "- commit_sha: ${CIRCLE_SHA1}"
                 echo "- branch: ${CIRCLE_BRANCH}"
-                echo
                 cat \<< EOF_A > /tmp/tmp-message.json
                 {
                   "event_type": "create",
@@ -34,7 +33,6 @@ jobs:
               ;;
               *)
                 echo "No need to build for ${CIRCLE_BRANCH}."
-                echo
               ;;
             esac
 
